@@ -2,8 +2,6 @@ This is the workspace for algorighm learning
 
 Implementation language is C++
 
-<<<<<<< HEAD
-I will keep adding modules
-=======
-Creating branch is easy
->>>>>>> feature1
+
+Most of the code is the same as DANIEL'S ALGORITHM IMPLEMENTAIONS
+You can find his repository from github
