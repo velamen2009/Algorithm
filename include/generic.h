@@ -15,12 +15,13 @@
 
 #define MAX(a, b) ((a > b) ? a : b)
 #define MIN(a, b) ((a < b) ? a : b)
-#define RANDOM_INIT srand((time(NULL)))
+
+#define RANDOM_INIT()	srand(time(NULL))
 #define RANDOM(L, R)	(L + rand()%((R) - (L) + 1))
 
 namespace alg {
 	/**
-	 * swap of 2-elements, orignial value
+	 * swap of 2-elements, original value
 	 */
 	template<typename T>
 	static inline void swap(T& v1, T& v2){
@@ -35,9 +36,9 @@ namespace alg {
 	template<typename T>
 	static void printlist(T& list, int n){
 		for(int i=0; i!=n; ++i){
-			cout<<list[i]<<"\t";
+			std::cout<<list[i]<<"\t";
 		}
-		cout<<"\n"<<endl;
+		std::cout<<"\n"<<std::endl;
 	}
 }
 
