@@ -46,6 +46,106 @@ namespace alg{
 			}
 		}
 		
+		//
+		//Swap Sort
+		//
+		void swapSort(){
+			for(size_t i=0; i!=m_sort_list->size()-1; ++i){
+				for(size_t j=i+1; j!=m_sort_list->size(); ++j){
+					if(compare((*m_sort_list)[i],(*m_sort_list)[j])){
+						swap((*m_sort_list)[i],(*m_sort_list)[j]);
+					}
+				}
+			}
+		}
+		
+		//
+		//Bubble Sort
+		//
+		void bubbleSort(){
+			for(size_t i=0; i!=m_sort_list->size()-1; ++i){
+				for(size_t j=0; j!=m_sort_list->size()-1-i; ++j){
+					if(compare((*m_sort_list)[j],(*m_sort_list)[j+1])){
+						swap((*m_sort_list)[j],(*m_sort_list)[j+1]);
+					}
+				}
+			}
+		}
+		
+		//
+		//Bubble Sort Improved
+		//
+		void bubbleSortImproved(){
+			bool swapped = true;
+			for(size_t i=0; i!=m_sort_list->size()-1&&swapped; ++i){
+				swapped=false;
+				for(size_t j=0; j!=m_sort_list->size()-1-i; ++j){
+					if(compare((*m_sort_list)[j],(*m_sort_list)[j+1])){
+						swap((*m_sort_list)[j],(*m_sort_list)[j+1]);
+						swapped=true;
+					}
+				}
+			}
+		}
+		
+		//
+		//Selection Sort
+		//
+		void selectionSort(){
+			for(size_t i=0; i!=m_sort_list->size()-1; ++i){
+				for(size_t j=i+1; j!=m_sort_list->size(); ++j){
+					if(compare((*m_sort_list)[i],(*m_sort_list)[j])){
+						swap((*m_sort_list)[i],(*m_sort_list)[j]);
+					}
+				}
+			}
+		}
+		
+		//
+		//Heap Sort
+		//
+		void heapSort(){
+			for(int i=m_sort_list->size()/2-1; i>=0; --i){
+				heapAdjust(i, m_sort_list->size());
+			}
+			
+			for(int i=m_sort_list->size()-1; i!=0; --i){
+				swap((*m_sort_list)[i],(*m_sort_list)[0]);
+				heapAdjust(0, i);
+			}
+		}
+		
+		//
+		//Merge Sort
+		//
+		void mergeSort(){
+		
+		}
+		
+		//
+		//Quick Sort
+		//
+		void quickSort(){
+		
+		}
+	
+	private:
+		void heapAdjust(int s, int m){
+			T temp = (*m_sort_list)[s];
+			
+			for(size_t j=2*s+1; j<m; j=j*2+1){
+				if(j+1<m && compare((*m_sort_list)[j+1],(*m_sort_list)[j])){
+					++j;
+				}
+				if(compare(temp, (*m_sort_list)[j])){
+					break;
+				}
+				(*m_sort_list)[s] = (*m_sort_list)[j];
+				s=j;
+			}
+			(*m_sort_list)[s] = temp;
+		}
+		
 	private:
 		vector<T> *m_sort_list;
 		vector<T> m_merge_list;
