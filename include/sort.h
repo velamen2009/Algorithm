@@ -3,6 +3,7 @@
 
 #include<iostream>
 #include<vector>
+#include "generic.h"
 
 using namespace std;
 
@@ -126,7 +127,7 @@ namespace alg{
 		//Quick Sort
 		//
 		void quickSort(){
-		
+			_quickSort(0, m_sort_list->size());
 		}
 	
 	private:
@@ -144,6 +145,32 @@ namespace alg{
 				s=j;
 			}
 			(*m_sort_list)[s] = temp;
+		}
+		
+		void _quickSort(int begin, int end){
+			if(begin<end){
+				int pivot_idx = partition(begin, end);
+				_quickSort(begin, pivot_idx-1);
+				_quickSort(pivot_idx+1, end);
+			}
+		}
+		
+		int partition(int begin, int end){
+			int pivot_idx = RANDOM(begin, end);
+			T pivot = (*m_sort_list)[pivot_idx];
+			swap((*m_sort_list)[begin],(*m_sort_list)[pivot_idx]);
+			
+			while(begin<end){
+				while(begin<end&&compare((*m_sort_list)[end],pivot)){
+					--end;
+				}
+				swap((*m_sort_list)[begin],(*m_sort_list)[end]);
+				while(begin<end&&compare(pivot,(*m_sort_list)[begin])){
+					++begin;
+				}
+				swap((*m_sort_list)[begin],(*m_sort_list)[end]);
+			}
+			return end;
 		}
 		
 	private:
