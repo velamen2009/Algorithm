@@ -100,10 +100,10 @@ int main (int argc, char const *argv[])
 	cout << endl;
 	
 	makeArray(a,10);
-	cout << "############### merge sort ###############" << endl;
+	cout << "############### merge sort top down ###############" << endl;
 	cout << "before sort::: " ;
 	sort.displaySort();
-	sort.mergeSort();
+	sort.mergeSortTopDown();
 	cout << "after sort ::: ";
 	sort.displaySort();
 	cout << endl;

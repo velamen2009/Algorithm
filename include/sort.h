@@ -119,8 +119,10 @@ namespace alg{
 		//
 		//Merge Sort
 		//
-		void mergeSort(){
-		
+		void mergeSortTopDown(){
+			for(int i=0; i!=m_sort_list->size(); ++i){
+				m_merge_list.push_back((*m_sort_list)[i]);
+			}
 		}
 		
 		//
@@ -171,6 +173,41 @@ namespace alg{
 				swap((*m_sort_list)[begin],(*m_sort_list)[end]);
 			}
 			return end;
+		}
+		
+		void topDownSplitMerge(int begin, int end){
+			/* if size==1, 
+			 * consider it's sorted
+			 */
+			if(end-begin<2){
+				return;
+			}
+			
+			int middle = (begin+end)/2;
+			topDownSplitMerge(begin, middle);
+			topDownSplitMerge(middle, end);
+			topDownMerge(begin, middle, end);
+			copyArray(begin, end);
+		}
+		
+		void topDownMerge(int begin, int middle, int end){
+			int i=begin, j=middle;
+			for(int k=begin; k!=end; ++k){
+				if(i<middle && (j>=end || compare((*m_sort_list)[j],(*m_sort_list)[i]))){
+					m_merge_list[k] = (*m_sort_list)[i];
+					++i;
+				}
+				else{
+					m_merge_list[k] = (*m_sort_list)[j];
+					++j;
+				}
+			}
+		}
+		
+		void copyArray(int begin, int end){
+			for(int i=begin; i!=end; ++i){
+				(*m_sort_list)[i] = m_merge_list[i];
+			}
 		}
 		
 	private:
