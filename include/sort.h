@@ -123,13 +123,14 @@ namespace alg{
 			for(int i=0; i!=m_sort_list->size(); ++i){
 				m_merge_list.push_back((*m_sort_list)[i]);
 			}
+			topDownSplitMerge(0, m_sort_list->size());
 		}
 		
 		//
 		//Quick Sort
 		//
 		void quickSort(){
-			_quickSort(0, m_sort_list->size());
+			_quickSort(0, m_sort_list->size()-1);
 		}
 	
 	private:
@@ -172,7 +173,7 @@ namespace alg{
 				}
 				swap((*m_sort_list)[begin],(*m_sort_list)[end]);
 			}
-			return end;
+			return begin;
 		}
 		
 		void topDownSplitMerge(int begin, int end){
