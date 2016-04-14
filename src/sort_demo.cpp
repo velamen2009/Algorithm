@@ -91,7 +91,7 @@ int main (int argc, char const *argv[])
 	cout << endl;
 	
 	makeArray(a,10);
-	cout << "############### heap sort ###############" << endl;
+	cout << "################# heap sort #################" << endl;
 	cout << "before sort::: " ;
 	sort.displaySort();
 	sort.heapSort();
@@ -100,7 +100,7 @@ int main (int argc, char const *argv[])
 	cout << endl;
 	
 	makeArray(a,10);
-	cout << "############### merge sort top down ###############" << endl;
+	cout << "########### merge sort top down ###########" << endl;
 	cout << "before sort::: " ;
 	sort.displaySort();
 	sort.mergeSortTopDown();
@@ -109,7 +109,7 @@ int main (int argc, char const *argv[])
 	cout << endl;
 	
 	makeArray(a,10);
-	cout << "############### quick sort ###############" << endl;
+	cout << "################# quick sort ##################" << endl;
 	cout << "before sort::: " ;
 	sort.displaySort();
 	sort.quickSort();
