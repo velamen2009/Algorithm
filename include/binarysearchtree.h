@@ -104,6 +104,12 @@ public:
 		if(NULL==node){return NULL;}
 		return node->key;
 	}
+	void deleteMin(){
+		root = deleteMin(root);
+	}
+	void deleteByKey(KEY key){
+		root = deleteByKey(root, key);
+	}
 private:
 	VALUE get(Node<KEY, VALUE>* node, KEY key){
 		if(NULL == node){ return NULL; }
@@ -159,6 +165,31 @@ private:
 		else{ return node;}
 	}
 	
+	Node<KEY, VALUE>* deleteMin(Node<KEY, VALUE>* node){
+		if(NULL==node->left){ return node->right;}
+		node->left = deleteMin(node->left);
+		node->N = size(node->left) + size(node->right) + 1;
+		return node;
+	}
+	Node<KEY, VALUE>* deleteByKey(Node<KEY, VALUE>* node, KEY key){
+		if(NULL==node){return NULL;}
+		if(node->key > key){
+			node->left = deleteByKey(node->left, key);
+		}
+		else if(node->right < key){
+			node->right = deleteByKey(node->right, key);
+		}
+		else{
+			if(node->right == NULL){return node->left;}
+			if(node->left == NULL){return node->right;}
+			Node<KEY, VALUE>* t = node;
+			node = min(t->right);
+			t->right = deleteMin(t->right);
+			node->left = t->left;
+		}
+		node->N = size(node->left) + size(node->right) + 1;
+		return node;
+	}
 private:
 	Node<KEY, VALUE>* root;
 };
