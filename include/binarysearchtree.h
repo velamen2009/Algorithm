@@ -8,6 +8,7 @@
 
 using namespace std;
 
+namespace alg{
 template <typename KEY, typename VALUE>
 struct Node{
 	KEY key;
@@ -20,8 +21,8 @@ struct Node{
 		key = _key;
 		value = _value;
 		N = _N;
-		left = NULL;
-		right = NULL;
+		left = 0;
+		right = 0;
 	}
 };
 
@@ -76,15 +77,29 @@ public:
 			}
 			int length = vec.size();
 			for(int i=0; i<length; ++i){
-				cout<<vec[i]->key<<":"<<vec[i]->value<<":"<<vec[i]->N<<"\t";
+				if(NULL==vec[i]){
+					cout<<"#";
+					vec.push_back(NULL);
+					vec.push_back(NULL);
+				}
+				else{
+					//cout<<vec[i]->key<<":"<<vec[i]->value<<":"<<vec[i]->N;
+					cout<<vec[i]->key;//<<":"<<vec[i]->value<<":"<<vec[i]->N;
+					if(NULL!=vec[i]->left){
+						vec.push_back(vec[i]->left);
+					}
+					else{
+						vec.push_back(NULL);
+					}
+					if(NULL!=vec[i]->right){
+						vec.push_back(vec[i]->right);
+					}
+					else{
+						vec.push_back(NULL);
+					}
+				}
 				for(int i=0; i<interval; ++i){
 					cout<<" ";
-				}
-				if(NULL!=vec[i]->left){
-					vec.push_back(vec[i]->left);
-				}
-				if(NULL!=vec[i]->right){
-					vec.push_back(vec[i]->right);
 				}
 			}
 			typename vector<Node<KEY, VALUE>* >::iterator it;
@@ -114,6 +129,7 @@ private:
 	VALUE get(Node<KEY, VALUE>* node, KEY key){
 		if(NULL == node){ return NULL; }
 		if(node->key == key){ return node->value;}
+		
 		if(node->key > key){
 			return get(node->left, key);
 		}
@@ -166,7 +182,11 @@ private:
 	}
 	
 	Node<KEY, VALUE>* deleteMin(Node<KEY, VALUE>* node){
-		if(NULL==node->left){ return node->right;}
+		if(NULL==node->left){
+			Node<KEY, VALUE>* rtNode = node->right;
+			delete node;
+			return rtNode;
+		}
 		node->left = deleteMin(node->left);
 		node->N = size(node->left) + size(node->right) + 1;
 		return node;
@@ -176,12 +196,20 @@ private:
 		if(node->key > key){
 			node->left = deleteByKey(node->left, key);
 		}
-		else if(node->right < key){
+		else if(node->key < key){
 			node->right = deleteByKey(node->right, key);
 		}
 		else{
-			if(node->right == NULL){return node->left;}
-			if(node->left == NULL){return node->right;}
+			if(node->right == NULL){
+				Node<KEY, VALUE>* rtNode = node->left;
+				delete node;
+				return rtNode;
+			}
+			if(node->left == NULL){
+				Node<KEY, VALUE>* rtNode = node->right;
+				delete node;
+				return rtNode;
+			}
 			Node<KEY, VALUE>* t = node;
 			node = min(t->right);
 			t->right = deleteMin(t->right);
@@ -193,5 +221,6 @@ private:
 private:
 	Node<KEY, VALUE>* root;
 };
+}
 
 #endif
