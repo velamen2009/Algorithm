@@ -45,9 +45,12 @@ public:
 		cout<<"The depth of the balanced tree is: "<<thedepth<<endl;
 		vector<Node23<KEY, VALUE>* > vec;
 		vec.push_back(root);
-		for(int n=0; n<thedepth; ++n){
-			int space = pow(2, thedepth-n) -2;
-			int interval = pow(2, thedepth-n+1)-3;
+		for(int n=1; n<=thedepth; ++n){
+			int space = 0;
+			if(n<thedepth){
+				space = pow(2, thedepth-n+2) -2*(thedepth-n+1);
+			}
+			int interval = 2*space+1;
 			int size = vec.size();
 			for(int s=0; s<space; ++s){cout<<" ";}
 			for(int i=0; i<size; ++i){
@@ -102,7 +105,7 @@ private:
 			return new Node23<KEY, VALUE>(key, value, 1, 1);
 		}
 		if(root == node){
-			if(root->lvalue > key){
+			if(root->lkey > key){
 				root->left = put(root->left, key, value);
 			}
 			else{
