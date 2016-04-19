@@ -9,7 +9,7 @@ using namespace alg;
 int main(){
 	BalancedSearchTree<char, int> bst;
 	srand(time(NULL));
-	for(int i=0; i<1; ++i){
+	for(int i=0; i<2; ++i){
 		char key = rand()%26+65;
 		bst.put(key, i);
 	}
