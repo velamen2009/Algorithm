@@ -33,7 +33,7 @@ namespace alg{
 			if(NULL==node){
 				return;
 			}
-			return insertAfter(node, new DoublyLinkedNode<T>(v));
+			insertAfter(node, new DoublyLinkedNode<T>(v));
 		}
 		void insertBefore(T u, T v){
 			DoublyLinkedNode<T>* node = searchNode(u);
