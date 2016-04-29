@@ -40,6 +40,11 @@ int main()
 	charDList.remove(d);
 	charDList.print();
 	
+	cout<<"Remove head and tail:"<<endl;
+	charDList.removeHead();
+	charDList.removeTail();
+	charDList.print();
+	
 	cout<<"Reverse order:"<<endl;
 	charDList.print_reverse();
 	

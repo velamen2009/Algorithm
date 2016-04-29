@@ -52,6 +52,12 @@ namespace alg{
 			DoublyLinkedNode<T>* node = searchNode(t);
 			remove(node);
 		}
+		void removeHead(){
+			remove(head);
+		}
+		void removeTail(){
+			remove(tail);
+		}
 		void print(){
 			DoublyLinkedNode<T>* p = head;
 			while(NULL!=p){
