@@ -12,19 +12,24 @@ int main()
 
 	srand(time(NULL));
 	
-	//decare int stack
-	const int MAX_ELEMENTS = 10;
+	const int MAX_ELEMENTS = 5;
 	list<int> intlist;
 	
-    // generate random numbers and fill them to the stack
 	for(int i = 0; i != MAX_ELEMENTS; ++i ){
-		intlist.add(rand()%100);
+		int a = rand()%100;
+		intlist.push_back(a);
+		intlist.push_front(a);
 	}
 	
-	//print stack
-	std::cout<<std::endl;
+	std::cout<<"List after push back and front:"<<std::endl;
 	intlist.print();
-	std::cout<<std::endl;
 
+	for(int i = 0; i != 3; ++i ){
+		intlist.pop_back();
+		intlist.pop_front();
+	}
+	std::cout<<"List after pop back and front:"<<std::endl;
+	intlist.print();
+	
 	return 0;
 } //
