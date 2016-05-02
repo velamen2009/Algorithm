@@ -28,6 +28,16 @@ namespace alg{
 	class DoublyLinkedList{
 	public:
 		DoublyLinkedList():head(0),tail(0){}
+		bool empty(){return 0==head;}
+		int size(){
+			DoublyLinkedNode<T>* node = head;
+			int size = 0;
+			while(node!=0){
+				node=node->next;
+				++size;
+			}
+			return size;
+		}
 		void insertAfter(T u, T v){
 			DoublyLinkedNode<T>* node = searchNode(u);
 			if(NULL==node){
@@ -74,7 +84,20 @@ namespace alg{
 			}
 			cout<<endl;
 		}
-	private:
+		typedef DoublyLinkedNode<T>* iterator;
+		iterator begin(){return head;}
+		iterator end(){return tail;}
+		iterator operator[](int index){
+			if(0==index){return head;}
+			int i=0;
+			iterator t = head;
+			while(++i<=index){
+				t = t->next;
+			}
+			return t;
+		}
+		
+	public:
 		DoublyLinkedNode<T>* searchNode(T t){
 			DoublyLinkedNode<T>* p = head;
 			while(NULL!=p){

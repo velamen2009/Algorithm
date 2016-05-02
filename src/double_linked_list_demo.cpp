@@ -14,11 +14,13 @@ int main()
 	srand(time(NULL));
 	
 	DoublyLinkedList<char> charDList;
+	cout<<"The size of double linked list is: "<<charDList.size()<<endl;
 	
 	for(int i = 0; i != 10; ++i ){
 		charDList.insertTail(rand()%26+65);
 	}
 	cout<<"Initial 10 times insert at tail:"<<endl;
+	cout<<"The size of double linked list is: "<<charDList.size()<<endl;
 	charDList.print();
 	
 	cout<<"3 times insert at head:"<<endl;
@@ -48,5 +50,14 @@ int main()
 	cout<<"Reverse order:"<<endl;
 	charDList.print_reverse();
 	
+	DoublyLinkedList<char>::iterator it = charDList.begin();
+	cout<<"The begin is: "<<it->data<<endl;
+	
+	DoublyLinkedList<char>::iterator rit = charDList.end();
+	cout<<"The end is: "<<rit->data<<endl;
+	
+	for(int i=0; i<3; ++i){
+		cout<<"The value "<<i<<" is: "<<charDList[i]->data<<endl;
+	}
 	return 0;
 } //
