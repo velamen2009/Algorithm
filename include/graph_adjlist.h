@@ -7,22 +7,24 @@
 #define __GRAPH_ADJLIST_H__
 
 #include "generic.h"
+#include "graph_search.h"
 #include <vector>
 
 using namespace std;
 
 namespace alg {
+	struct Vertex{
+		int id;
+		bool visited;
+		Vertex(int _id){
+			id = _id;
+			visited = false;
+		}
+	};
+	
 	class Graph_AdjList {
-		
+		friend class Graph_Search;
 		public:
-			struct Vertex{
-				int id;
-				bool visited;
-				Vertex(int _id){
-					id = _id;
-					visited = false;
-				}
-			};
 			/* _V:		number of vertices
 			 * matrix:	the upper triangle matrix
 			 *			a[i, i] = 0, self-edge weight = 0;
@@ -32,7 +34,9 @@ namespace alg {
 			 *			a[i, j] = matrix[k], k = i*(n-(i+1)/2)+j when i<=j
 			 *			a[i, j] = a[j, i] when i>j
 			 */
+			Graph_AdjList():V(0),E(0){}
 			Graph_AdjList(int _V, vector<int> matrix):V(_V){
+				E = 0;
 				for(int i=0; i<V; ++i){
 					vertexList.push_back(new Vertex(i));
 				}
@@ -45,7 +49,6 @@ namespace alg {
 						int k = 0;
 						if(col>row){
 							k = row*(2*V-row-1)/2+col;
-							
 						}
 						else if(row > col){
 							k = col*(2*V-col-1)/2+row;
@@ -55,9 +58,11 @@ namespace alg {
 						}
 						if(1==matrix[k]){
 							adj[row].push_back(vertexList[col]);
+							++E;
 						}
 					}
 				}
+				E/=2;
 			}
 			void print(){
 				vector<int> out(V*V, -1);
@@ -86,6 +91,15 @@ namespace alg {
 						}
 					}
 					cout<<endl;
+				}
+			}
+			bool isConnected(int u, int v){
+				vector<Vertex*> uAdj = adj[u];
+				for(int i=0; i<uAdj.size(); ++i){
+					if(uAdj[i]->id == v){
+						return true;
+					}
+					return false;
 				}
 			}
 			int vertex(){return V;}
